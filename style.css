@@ -1,0 +1,18 @@
+#rooms > button, #rooms > input, textarea {
+    display: inline-block;
+    width: 98%;
+    margin: 1%;
+    padding: 1%;
+}
+#rooms > input, textarea {
+    width: 95.5%;
+}
+#room-chat {
+    display: inline-block;
+    width: 96%;
+    min-height: 100px;
+    margin: 1%;
+    padding: 1%;
+    outline: 1px blue solid;
+    display: none;
+}
