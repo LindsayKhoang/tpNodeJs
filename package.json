@@ -1,0 +1,28 @@
+{
+  "name": "nodejs_tmp",
+  "version": "1.0.0",
+  "description": "Test projet NodeJS + mongoose + mongodb",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "Olivier Pons",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "compression": "^1.7.4",
+    "dayjs": "^1.9.6",
+    "express": "^4.17.1",
+    "hexy": "^0.3.1",
+    "mime-types": "^2.1.27",
+    "moment": "^2.29.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.8",
+    "optimist": "^0.6.1",
+    "twig": "^1.15.4",
+    "underscore": "^1.12.0"
+  }
+}
