@@ -32,23 +32,43 @@ mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUn
     room2.save();
     let room3 = new Room({name: 'msi2020'});
     room3.save();
-
-    let message1 = new Message({ username: 'Zildjian', date: dayjs().subtract(1, 'minutes'), room: 'globale', content: 'Coucou' });
-    let message2 = new Message({ username: 'Zildjian', date: dayjs().subtract(2, 'minutes'), room: 'globale', content: 'Coucou' });
-    let message3 = new Message({ username: 'Zildjian', date: dayjs().subtract(3, 'minutes'), room: 'globale', content: 'Coucou' });
-    let message4 = new Message({ username: 'Zildjian', date: dayjs().subtract(4, 'minutes'), room: 'globale', content: 'Coucou' });
-    let message5 = new Message({ username: 'Zildjian', date: dayjs().subtract(5, 'minutes'), room: 'globale', content: 'Coucou' });
-    let message6 = new Message({ username: 'Zildjian', date: dayjs().subtract(6, 'minutes'), room: 'globale', content: 'Coucou' });
+*/
+/*
+    let message1 = new Message({ username: 'Olivier', date: dayjs().subtract(1, 'minutes'), room: 'globale', content: 'Bonjour à tous' });
+    let message2 = new Message({ username: 'Florent', date: dayjs().subtract(2, 'minutes'), room: 'globale', content: 'Bonjour' });
+    let message3 = new Message({ username: 'Stephan', date: dayjs().subtract(3, 'minutes'), room: 'globale', content: 'Bonjour' });
+    let message4 = new Message({ username: 'Lindsay', date: dayjs().subtract(4, 'minutes'), room: 'globale', content: 'Bonjour' });
+    let message5 = new Message({ username: 'Olivier', date: dayjs().subtract(5, 'minutes'), room: 'globale', content: 'On va commencer le cours, accrochez-vous' });
+    let message6 = new Message({ username: 'Florent', date: dayjs().subtract(6, 'minutes'), room: 'globale', content: 'Allez !' });
     message1.save();
     message2.save();
     message3.save();
     message4.save();
     message5.save();
-    message6.save();*/
-
+    message6.save();
+    let message7 = new Message({ username: 'Olivier', date: dayjs().subtract(1, 'minutes'), room: 'dev', content: 'Bonjour à tous' });
+    let message8 = new Message({ username: 'Florent', date: dayjs().subtract(2, 'minutes'), room: 'dev', content: 'Bonjour' });
+    let message9 = new Message({ username: 'Stephan', date: dayjs().subtract(3, 'minutes'), room: 'dev', content: 'Bonjour' });
+    let message10 = new Message({ username: 'Lindsay', date: dayjs().subtract(4, 'minutes'), room: 'dev', content: 'Bonjour' });
+    message7.save();
+    message8.save();
+    message9.save();
+    message10.save();
+*/
     var roomNames = [];
     var messages = [];
-
+/*
+	function getMessages(room) {
+		messages = [];
+        Message.find({room: room},function(err, message) {
+            for(var i=0; i < message.length; i++)
+            {
+                messages[i] = message[i];
+            }
+        });
+		return messages;
+	}
+*/
     setTimeout(function(){
         Room.find({},function(err, room) {
             for(var i=0; i < room.length; i++)
@@ -57,13 +77,13 @@ mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUn
             }
         });
 
-        Message.find({},function(err, message) {
+        Message.find({room: 'globale'},function(err, message) {
             for(var i=0; i < message.length; i++)
             {
                 messages[i] = message[i];
             }
         });
-        Message.find({}).exec().then(message => {console.log(message)});
+		return messages;
         }, 1000);
 
 
@@ -80,8 +100,7 @@ mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUn
             })
             .get('/rooms', function (req, res) {
                 // TODO: fill an array with rooms found in database:
-                res.json({result: Room.find({})});
-                // res.json({result: roomNames});
+                res.json({result: roomNames});
                 // res.json({result: ["globale", "dev", "msi 2020"]});
                 // test: res.json({message: "Critical error"});
             })
@@ -108,7 +127,8 @@ mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUn
             .post('/room/:roomName/messages', function (req, res, next) {
                 let roomName = req.params['roomName'];
                 let content = req.body.content;
-                let messagex = new Message({ username: 'test', date: dayjs(), room: roomName, content: content });
+                let userName = req.body.userName;
+                let messagex = new Message({ username: userName, date: dayjs(), room: roomName, content: content });
                 messagex.save().then(messages.push(messagex));
                 // TODO: replace by a real query to mongoose:
                 res.json({
