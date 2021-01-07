@@ -8,7 +8,7 @@ const twig = require('twig').twig; // ('twig')=Module, "().twig"=render function
 // TODO: declare mongoose models
 // TODO: connect to mongodb
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://lindsay:lindsay@cluster0.6ebyi.mongodb.net/test', {useNewUrlParser: true, useUnifiedTopology: true });
 
     let userJSON = new mongoose.Schema({
         pseudo: { type: String, unique: true },
